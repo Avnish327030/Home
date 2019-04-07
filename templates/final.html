@@ -1,0 +1,23 @@
+{% extends 'header.html' %}
+{%  load staticfiles %}
+{%  block content %}
+
+
+    {% for a,b in res.items %}
+     {% for m in mid %}
+         {% if m.member_id == a %}
+              <div class="col-md-4" >
+            <div class="thumbnail" id="profile"><img  src="{{m.image.url}}" style="height:200px;
+    width:auto;/*maintain aspect ratio*/
+    max-width:500px;border-radius: 50%"/>
+  <br><br>  <br><br><br><br><br>
+        <div class="caption carousel-caption">
+            <h4>{{ m }}</h4>
+    {% endif %}
+   {% endfor %}
+PER PERSON CHARGE:{{ charge }}
+<br>
+        Amount that you had spend {{ b.spend }}&nbsp;Rs.<br>
+    {{ b.message }} &nbsp;{{ b.amount }}&nbsp;Rs.<br>
+    </div></div></div>{%  endfor%}
+{% endblock %}

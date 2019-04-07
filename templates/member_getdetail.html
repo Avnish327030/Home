@@ -1,0 +1,33 @@
+{% extends 'header.html' %}
+{%  load staticfiles %}
+{%  block content %}
+
+    <div class="col-md-12">
+    <form  action="{% url 'getdetailbydate' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="member_id" value="{{ member_id }}">
+        <input type="hidden" name="manager_id" value="{{ manager_id }}">
+
+        <label>FROM DATE</label> <input type="date" name="from_date" required>
+        <label>TO DATE</label>  <input type="date" name="to_date" required>
+    <input type="submit" class="btn btn-success" value="GET DETAIL">
+
+    </form>
+    <table border="1" class="table table-responsive">
+<caption>Manager Name:{{  Manager_name}} &nbsp; Member Name:{{ Member_name }}</caption>
+    <tr style="background-color: #3c3c3c;color: gainsboro">
+    <th>DATE</th>
+        <th>DAY</th>
+    <th>AMOUNT</th>
+</tr>
+{% for m in member_detail %}
+<tr>
+    <td>{{m.date_exp|date:"d F Y"}}</td><td>{{ m.date_exp|date:"l" }}</td><td>{{m.amount}}</td>
+    </tr>
+
+
+{% endfor %}
+        <tr ><td colspan="2">TOTAL AMOUNT</td><td>{{ amount.amount__sum }}</td></tr>
+    </table>
+        <br></div>
+{% endblock %}

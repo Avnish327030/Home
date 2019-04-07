@@ -1,0 +1,28 @@
+
+{% extends 'header.html' %}
+{%  block content %}
+{% load staticfiles %}
+    <style>
+
+    input,textarea{
+
+        border-radius: 5px;
+        padding: 10px;
+        width: 80%;
+        font-family: Helvetica;
+        color: black;
+    }
+    </style>
+  <div class="col-md-12">
+      <div CLASS="container-fluid">
+      <form method="post"  >
+    {% csrf_token %}
+{% for field in form %}
+    {{ field.label_tag}}<br>
+
+    {{ field}}<br>
+
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">SEND</button>
+  </form></div></div>
+{% endblock %}

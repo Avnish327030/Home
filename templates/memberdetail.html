@@ -1,0 +1,23 @@
+{% extends 'header.html' %}
+{%  load staticfiles %}
+{%  block content %}
+    <div class="col-md-12">
+    <form class="form-inline" method="post" action="{{ home }}">
+                            {% csrf_token %}
+                            <input  class="form-control " name="mname" type="text" placeholder="ENTER MEMBER NAME" style="width: 90%" required  autofocus>
+                            <input class="btn btn-success" type="submit" value="SEARCH"></form>
+<br>
+{% for q in m %}
+           <div class="col-md-4" >
+            <div class="thumbnail" id="profile"><img  src="{{q.image.url}}" style="height:150px;
+    width:auto;/*maintain aspect ratio*/
+    max-width:350px;border-radius: 50%"/>
+                <br><br><br><br>
+        <div class="caption carousel-caption">
+            <h3>{{ q.fname }}</h3>
+            <p>Mobile no:{{ q.Mobile_no}}</p>
+        </div>
+    </div>
+    </div>
+{% endfor %}</div>
+   {% endblock %}

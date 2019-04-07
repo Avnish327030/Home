@@ -1,0 +1,30 @@
+{% extends 'header.html' %}
+{%  load staticfiles %}
+{%  block content %}
+
+<div class="col-md-12"><form class="form-horizontal" action="{% url 'expreportbydate' %}" method="post">
+    {% csrf_token %}
+
+        <input type="hidden" name="manager_id" value="{{ manager_id }}">
+
+        <label>FROM DATE</label> <input type="date" name="from_date" required>
+        <label>TO DATE</label>  <input type="date" name="to_date" required>
+    <input type="submit" class="btn btn-success" value="GET DETAIL">
+
+    </form>
+
+    <form class="form-horizontal" action="{% url 'expreport' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="no_of_mem" value="{{ no_of_mem }}">
+    {% for k,v in amount.items  %}
+  <input type="hidden" name="mem{{ forloop.counter }}" value="{{ k }}">
+        <label>Total expenditure of   {% for m in mid %}
+         {% if m.member_id == k %}{{ m }}{% endif %}
+   {% endfor %}  </label>    <input type="text" class="form-control" name="{{ k }}" value="{% if v.amount__sum is None %}{{ 0 }}{% else %}{{ v.amount__sum }}{% endif %}" >
+    {% endfor %}
+
+ &nbsp;Total Amount:<input class="form-control" type="number" value="{% if total_amount.amount__sum is None %}{{ 0 }}{% else %}{{ total_amount.amount__sum }}{% endif %}" name="tot_am" > &nbsp;
+<br>
+    <input type="submit" class="btn btn-success" value="Genrate Report">
+    </form><br><br></div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'header.html' %}
+{%  load staticfiles %}
+{%  block content %}
+<div class="col-md-12">
+<div class="container-fluid">
+ <form method="post" class="form-horizontal">
+    {% csrf_token %}
+   {{ update_exp.as_p }}
+     <input type="submit" class="btn btn-success" value="UPDATE"></form><br></div></div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'header.html' %}
+{%  load staticfiles %}
+{%  block content %}
+
+    <style>
+    .Avn
+    {
+        background-color: white;
+border: none;
+    }
+    </style>
+    <div class="col-md-12">
+<table border="1" class="table table-condensed">
+<tr style="background-color: #3c3c3c;color: gainsboro">
+    <th class="col">MANAGER ID</th>
+    <th class="col">MEMBER NAME</th>
+
+    <th class="col">TOTAL AMOUNT</th>
+</tr>
+    {% for k,v in amount.items %}
+        <form action="{% url 'exp_getdetail' %}" method="post">
+            {% csrf_token %}
+
+            <input type="hidden" name="manager_id" value="{{ Manager_id }}">
+            <input type="hidden" name="member_id" value="{{ k }}">
+            <tr>
+                <td><button class="Avn" type="submit"> {{ Manager_id }}</button></td>
+                <td><button class="Avn" type="submit">    {% for m in mid %}
+         {% if m.member_id == k %}{{ m }}{% endif %}
+   {% endfor %}          </button></td>
+                <td><button class="Avn" type="submit">  {{v.amount__sum}}</button></td>
+
+        </tr>
+        </form>
+     {% endfor %}
+</table></div><br>
+{% endblock %}

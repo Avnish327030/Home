@@ -1,0 +1,35 @@
+{% extends 'header.html' %}
+{%  load staticfiles %}
+{%  block content %}
+
+<div class="col-md-12">
+    <div class="col-md-8">
+<div class="row" id="member">
+{% for q in m %}
+          <div class="col-md-4" >
+              <div class="thumbnail">
+              <img  src="{{q.image.url}}" style="height:100px;
+    width:auto;/*maintain aspect ratio*/
+    max-width:250px;border-radius: 50%"/>
+<br><br><br><br><br><br><br>
+    <div class="caption carousel-caption">
+    <h3>{{ q.fname }}</h3>
+            <p>Mobile no:{{ q.Mobile_no}}</p>
+        <form class="form-inline" action="{% url 'delete' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="member_id" value="{{ q.member_id }}">
+            <input type="submit" class="btn btn-danger" value="REMOVE"></form></div></div></div>{% endfor %}</div>
+    <br>
+
+    </div>
+
+    &nbsp;&nbsp;<div class="col-md-4">
+<div class="row" >
+    <div class="container-fluid">
+ <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{% url 'managemember' %}">
+    {% csrf_token %}
+          {{ member_form.as_p }}
+     <input type="submit" class="btn btn-success" value="ADD MEMBER"></form></div>
+</div>
+</div></div>
+{% endblock %}

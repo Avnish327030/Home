@@ -1,0 +1,10 @@
+{% extends 'header.html' %}
+{%  load staticfiles %}
+{%  block content %}
+    <div class="col-md-12">
+
+    <form method="post" class="form form-horizontal">
+    {% csrf_token %}
+    {{ manager_form.as_p}}
+        <input class="btn btn-success" type="submit" value="SIGN UP"></form></div>
+{% endblock %}
